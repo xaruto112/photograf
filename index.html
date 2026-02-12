@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио фотографа | Лютова Елена</title>
+    <!-- Font Awesome 6 (иконки) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Обнуление и базовые настройки */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fcfcfc;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* Контейнер */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Шапка */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: #c7a05b;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #c7a05b;
+        }
+
+        /* Hero-секция */
+        .hero {
+            padding: 80px 0;
+            background: linear-gradient(to right, #f8f8f8, #fff);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 strong {
+            font-weight: 700;
+            color: #c7a05b;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #c7a05b;
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #b38b4a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(199, 160, 91, 0.3);
+        }
+
+        /* Портфолио (галерея) */
+        .portfolio {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 300;
+            margin-bottom: 50px;
+        }
+
+        .section-title span {
+            font-weight: 700;
+            color: #c7a05b;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            aspect-ratio: 4 / 3;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Секция формы */
+        .contact-form {
+            background-color: #fff;
+            padding: 80px 0;
+        }
+
+        .form-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+            background: #f9f9f9;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #444;
+        }
+
+        .input-icon {
+            position: relative;
+        }
+
+        .input-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #c7a05b;
+            font-size: 1rem;
+        }
+
+        .input-icon input,
+        .input-icon textarea {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border 0.3s;
+        }
+
+        .input-icon textarea {
+            padding-left: 45px;
+            resize: vertical;
+            min-height: 100px;
+            border-radius: 20px;
+        }
+
+        .input-icon input:focus,
+        .input-icon textarea:focus {
+            outline: none;
+            border-color: #c7a05b;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 30px;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* Футер */
+        footer {
+            background-color: #1e1e1e;
+            color: #f0f0f0;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .footer-info span {
+            color: #c7a05b;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 20px;
+            font-size: 1.5rem;
+        }
+
+        .footer-social a {
+            transition: color 0.3s;
+        }
+
+        .footer-social a:hover {
+            color: #c7a05b;
+        }
+
+        .footer-contacts p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-contacts i {
+            color: #c7a05b;
+            width: 20px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .form-wrapper {
+                padding: 30px 20px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-contacts p {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Photo<span>Artist</span></div>
+                <nav>
+                    <a href="#portfolio">Портфолио</a>
+                    <a href="#contact">Связаться</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero секция -->
+        <section class="hero">
+            <div class="container">
+                <h1>Привет, я <strong>Лютова Елена</strong></h1>
+                <p>Профессиональный фотограф из Пятигорска. Ловлю искренние эмоции и создаю визуальные истории.</p>
+                <a href="#portfolio" class="btn">Смотреть работы</a>
+            </div>
+        </section>
+
+        <!-- Портфолио (галерея) -->
+        <section id="portfolio" class="portfolio">
+            <div class="container">
+                <h2 class="section-title">Моё <span>портфолио</span></h2>
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="images/portfolio-1.jpg" alt="Фотография 1 - Портфолио Анны Смирновой">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/portfolio-2.jpg" alt="Фотография 2 - Портфолио Анны Смирновой">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/portfolio-3.jpg" alt="Фотография 3 - Портфолио Анны Смирновой">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/portfolio-4.jpg" alt="Фотография 4 - Портфолио Анны Смирновой">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/portfolio-5.jpg" alt="Фотография 5 - Портфолио Анны Смирновой">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/portfolio-6.jpg" alt="Фотография 6 - Портфолио Анны Смирновой">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Форма для сбора контактов -->
+        <section id="contact" class="contact-form">
+            <div class="container">
+                <h2 class="section-title">Оставьте <span>контакты</span></h2>
+                <div class="form-wrapper">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Ваше имя</label>
+                            <div class="input-icon">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="name" name="name" placeholder="пэпэ" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="social">Ссылка на соцсеть (Instagram, VK, Telegram)</label>
+                            <div class="input-icon">
+                                <i class="fas fa-hashtag"></i>
+                                <input type="text" id="social" name="social" placeholder="https://instagram.com/username" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Номер телефона</label>
+                            <div class="input-icon">
+                                <i class="fas fa-phone-alt"></i>
+                                <input type="tel" id="phone" name="phone" placeholder="+7 (999) 123-45-67" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Сообщение (необязательно)</label>
+                            <div class="input-icon">
+                                <i class="fas fa-comment"></i>
+                                <textarea id="message" name="message" placeholder="Расскажите о вашей идее..."></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-submit">Отправить</button>
+                    </form>
+                    <div id="successMessage" class="success-message">
+                        <i class="fas fa-check-circle"></i> Спасибо! Ваши контакты отправлены. Я свяжусь с вами в ближайшее время.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Футер с контактами фотографа -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Photo<span>Artist</span></h3>
+                    <p>Фотография — это искусство остановить мгновение.</p>
+                    <div class="footer-social">
+                    
+                        <a href="#" aria-label="VK"><i class="fab fa-vk"></i></a>
+                        <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-contacts">
+                    <p><i class="fas fa-phone-alt"></i> +7 (928) 011-29-84</p>
+                    <p><i class="fas fa-envelope"></i> lyutova.elena@yandex.ru</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Пятигорск, Россия</p>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 PhotoArtist. Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Скрипт для обработки формы -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactForm');
+            const successMessage = document.getElementById('successMessage');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault(); // предотвращаем реальную отправку
+
+                // Простейшая валидация
+                const name = document.getElementById('name').value.trim();
+                const social = document.getElementById('social').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+
+                if (!name || !social || !phone) {
+                    alert('Пожалуйста, заполните имя, соцсеть и номер телефона.');
+                    return;
+                }
+
+                // Проверка телефона (минимум 10 цифр)
+                const phoneDigits = phone.replace(/\D/g, '');
+                if (phoneDigits.length < 10) {
+                    alert('Введите корректный номер телефона (не менее 10 цифр).');
+                    return;
+                }
+
+                // Имитация отправки данных
+                // Здесь можно добавить AJAX-запрос к серверу
+                console.log({
+                    name: name,
+                    social: social,
+                    phone: phone,
+                    message: document.getElementById('message').value.trim()
+                });
+
+                // Показываем сообщение об успехе
+                successMessage.classList.add('show');
+
+                // Очищаем форму
+                form.reset();
+
+                // Через 5 секунд скрываем сообщение
+                setTimeout(() => {
+                    successMessage.classList.remove('show');
+                }, 5000);
+            });
+        });
+    </script>
+</body>
+</html>
